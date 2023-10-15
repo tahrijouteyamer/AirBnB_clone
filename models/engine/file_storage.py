@@ -16,20 +16,20 @@ from models.review import Review
 
 
 class FileStorage:
-    """ construct """
+    """ Construct """
     __file_path = "file.json"
     __objects = {}
 
     def all(self):
-        """ return dictionary objects """
+        """ Return the dictionary objects """
         return FileStorage.__objects
 
     def new(self, obj):
-        """ sets in dictionary the obj with key <obj class name>.id """
+        """ Sets in dictionary the obj with key <obj class name>.id """
         FileStorage.__objects[obj.__class__.__name__ + "." + str(obj.id)] = obj
 
     def save(self):
-        """ serializes objectss to the JSON file (path: __file_path) """
+        """ Serializes objectss to the JSON file (path: __file_path) """
         with open(FileStorage.__file_path, 'w', encoding='utf-8') as fname:
             new_dict = {key: obj.to_dict() for key, obj in
                         FileStorage.__objects.items()}

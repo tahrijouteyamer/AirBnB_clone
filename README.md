@@ -1,1 +1,2 @@
-AirBnb group project with Amer Tahri Joutey
+Amer Tahri Joutey <tahrijouteyamer@hotmail.com>
+Rami Hassan <hass4all@hotmail.com>

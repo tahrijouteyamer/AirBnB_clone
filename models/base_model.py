@@ -10,6 +10,7 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         """Initialize a new BaseModel.
+
         Args:
             *args (any): Unused.
             **kwargs (dict): Key/value pairs of attributes.
@@ -24,8 +25,6 @@ class BaseModel:
                     self.__dict__[k] = datetime.strptime(v, tform)
                 else:
                     self.__dict__[k] = v
-        else:
-            models.storage.new(self)
 
     def save(self):
         """Update updated_at with the current datetime."""
@@ -34,6 +33,7 @@ class BaseModel:
 
     def to_dict(self):
         """Return the dictionary of the BaseModel instance.
+
         Includes the key/value pair __class__ representing
         the class name of the object.
         """
