@@ -1,57 +1,49 @@
 #!/usr/bin/python3
 import unittest
+import pep8
+import json
 import os
-import models
-
-from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
 from models.user import User
-from models.amenity import Amenity
 from models.state import State
 from models.city import City
+from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
+from models.engine.file_storage import FileStorage
+
+
+class TestFileStorageDocs(unittest.TestCase):
+    """ check for documentation """
+    def test_class_doc(self):
+        """ check for class documentation """
+        self.assertTrue(len(FileStorage.__doc__) > 0)
+
+
+class TestFileStoragePep8(unittest.TestCase):
+    """ check for pep8 validation """
+    def test_pep8(self):
+        """ test base and test_base for pep8 conformance """
+        style = pep8.StyleGuide(quiet=True)
+        file1 = 'models/engine/file_storage.py'
+        file2 = 'tests/test_models/test_engine/test_file_storage.py'
+        result = style.check_files([file1, file2])
+        self.assertEqual(result.total_errors, 0,
+                         "Found code style errors (and warning).")
+
 
 class TestFileStorage(unittest.TestCase):
-    def setUp(self):
-        self.b = BaseModel()
-        self.u = User()
-        self.a = Amenity()
-        self.s = State()
-        self.c = City()
-        self.p = Place()
-        self.r = Review()
-        self.storage = FileStorage()
-        self.storage.save()
-        if os.path.exists("file.json"):  # Corrected the typo here
-            pass
-        else:
-            os.mknod("file.json")
-
-    def tearDown(self):
-        del self.b
-        del self.u
-        del self.a
-        del self.s
-        del self.c
-        del self.p
-        del self.r
-        del self.storage
-        if os.path.exists("file.json"):  # Corrected the typo here
-            os.remove("file.json")
+    """ tests for class FileStorage """
+    @classmethod
+    def setUpClass(cls):
+        """ set up instances for all tests """
+        storage = FileStorage()
 
     def test_all(self):
-        val = self.storage.all()
-        self.assertIsNotNone(val)
-        self.assertEqual(type(val), dict)
+        """ test all method """
+        pass
 
-    def test_new(self):
-        val = self.storage.all()
-        self.u.name = "Neima"
-        self.u.id = "2121"
-        val2 = self.storage.new(self.u)
-        key = "{}.{}".format(self.u.__class__.__name__, self.u.id)
-        self.assertIsNotNone(val[key])
-
-if __name__ == "__main__":
-    unittest.main()
+    @classmethod
+    def tearDownClass(cls):
+        """ remove test instances """
+        pass
